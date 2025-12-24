@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Базовые правила - Викинги</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="logo">Викинги</a>
+        <div class="controls">
+            <div class="font-controls">
+                <button class="font-btn" data-size="small">A-</button>
+                <button class="font-btn" data-size="medium" disabled>A</button>
+                <button class="font-btn" data-size="large">A+</button>
+            </div>
+            <div class="language-switcher">
+                <a href="/rules/basic.html">RU</a> |
+                <a href="/en/rules/basic.html">EN</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="content-card">
+            <h1 class="page-title">📜 Базовые правила</h1>
+
+            <div class="breadcrumb">
+                <a href="/">Главная</a> →
+                <a href="/rules/">Правила игры</a> →
+                <span>Базовые правила</span>
+            </div>
+
+            <article class="content-article">
+                <h2>⚔️ Подготовка к бою</h2>
+
+                <p>Для начала игры вам понадобится:</p>
+                <ul>
+                    <li>Игровое поле 6x6 клеток</li>
+                    <li>10 фишек для каждой армии</li>
+                    <li>Кубик d6</li>
+                </ul>
+
+                <img src="/assets/images/battlefield.jpg" alt="Схема поля боя" class="content-image">
+                <p class="image-caption">Схема стандартной расстановки сил</p>
+
+                <h2>🔄 Ход игры</h2>
+                <p>Игроки ходят по очереди. В свой ход игрок может выполнить до 3 действий:</p>
+
+                <table class="rules-table">
+                    <thead>
+                        <tr>
+                            <th>Действие</th>
+                            <th>Стоимость</th>
+                            <th>Описание</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Движение</td>
+                            <td>1 действие</td>
+                            <td>Перемещение юнита на 1 клетку</td>
+                        </tr>
+                        <tr>
+                            <td>Атака</td>
+                            <td>2 действия</td>
+                            <td>Ближний бой с соседним юнитом</td>
+                        </tr>
+                        <tr>
+                            <td>Подкрепление</td>
+                            <td>3 действия</td>
+                            <td>Вызов новых войск с корабля</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="navigation-links">
+                    <a href="/rules/advanced.html" class="nav-link">→ Продвинутые правила</a>
+                    <a href="/rules/" class="nav-link">← Назад к правилам</a>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2025 Варгейм "Викинги" | Все права защищены</p>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+</body>
+</html>
