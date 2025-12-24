@@ -4,51 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Викинги - Варгейм</title>
-    <base href="/vikings_game_ru/">
-    <!-- Универсальные шрифты -->
-    <style>
-        :root {
-            --heading-font: Georgia, serif;
-            --body-font: Arial, sans-serif;
-        }
-        body {
-            font-family: var(--body-font);
-        }
-        h1, h2, h3, h4 {
-            font-family: var(--heading-font);
-        }
-    </style>
+    <base href="https://viyar-888.github.io/vikings_game_ru/">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- ФИКСИРОВАННЫЙ ХЕДЕР -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-section">
+                <h1 class="logo">
+                    <i class="fas fa-helmet-battle"></i>
+                    <span>ВИКИНГИ</span>
+                </h1>
+                <p class="subtitle">Стратегия эпохи викингов</p>
+            </div>
+            
+            <div class="header-controls">
+                <button class="control-btn" id="font-smaller" title="Уменьшить шрифт">
+                    <i class="fas fa-font"></i>-
+                </button>
+                <button class="control-btn" id="font-reset" title="Сбросить размер">
+                    <i class="fas fa-font"></i>○
+                </button>
+                <button class="control-btn" id="font-larger" title="Увеличить шрифт">
+                    <i class="fas fa-font"></i>+
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- АДАПТИВНЫЙ БАННЕР -->
     <div class="banner-container">
-        <img src="assets/images/banner.png" alt="Викинги" class="banner-image">
+        <div class="banner-overlay">
+            <h2>Эпоха Мечей и Славы</h2>
+            <p>Стратегическая настольная игра</p>
+        </div>
+        <img src="assets/images/banner.png" alt="Эпоха викингов" class="banner-image">
     </div>
 
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
     <main class="container">
         <nav class="main-nav">
             <a href="rules/" class="nav-card">
-                <i class="fas fa-scroll nav-icon"></i>
-                <span>Правила игры</span>
+                <div class="nav-icon-container">
+                    <i class="fas fa-scroll"></i>
+                </div>
+                <h3>Правила игры</h3>
+                <p>Базовые и продвинутые правила</p>
             </a>
+            
             <a href="factions/" class="nav-card">
-                <i class="fas fa-flag nav-icon"></i>
-                <span>Фракции</span>
+                <div class="nav-icon-container">
+                    <i class="fas fa-flag"></i>
+                </div>
+                <h3>Фракции</h3>
+                <p>Армии и их особенности</p>
             </a>
+            
             <a href="units/" class="nav-card">
-                <i class="fas fa-users nav-icon"></i>
-                <span>Юниты</span>
+                <div class="nav-icon-container">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Юниты</h4>
+                <p>Типы войск и характеристики</p>
             </a>
+            
             <a href="contact.html" class="nav-card">
-                <i class="fas fa-envelope nav-icon"></i>
-                <span>Связь</span>
+                <div class="nav-icon-container">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3>Связь</h3>
+                <p>Telegram-канал и обратная связь</p>
             </a>
         </nav>
     </main>
 
-    <footer class="footer">
-        <p>© 2025 Варгейм "Викинги"</p>
+    <!-- ФИКСИРОВАННЫЙ ФУТЕР -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>ВИКИНГИ</span>
+            </div>
+            <div class="footer-info">
+                <p>© 2025 Варгейм "Викинги"</p>
+                <p>Все права защищены. Только для личного использования.</p>
+            </div>
+            <div class="footer-links">
+                <a href="rules/">Правила</a>
+                <a href="factions/">Фракции</a>
+                <a href="units/">Юниты</a>
+                <a href="contact.html">Контакты</a>
+            </div>
+        </div>
     </footer>
 
     <script src="assets/js/main.js"></script>
