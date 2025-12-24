@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="preload" as="image" href="assets/images/banner.png">
 </head>
 <body>
     <!-- ХЕДЕР -->
@@ -19,114 +18,98 @@
                     <i class="fas fa-helmet-battle"></i>
                     <span>ВИКИНГИ</span>
                 </h1>
-                <p class="subtitle">Стратегия эпохи викингов</p>
+                <p class="subtitle">Стратегический варгейм</p>
             </div>
             <nav class="header-nav">
-                <a href="/vikings_game_ru/" class="nav-link active">
+                <a href="index.html" class="nav-link active">
                     <i class="fas fa-home"></i>
                     Главная
                 </a>
-                <a href="rules/" class="nav-link">
+                <a href="rules.html" class="nav-link">
                     <i class="fas fa-scroll"></i>
                     Правила
                 </a>
-                <a href="factions/" class="nav-link">
+                <a href="factions.html" class="nav-link">
                     <i class="fas fa-flag"></i>
                     Фракции
                 </a>
-                <a href="units/" class="nav-link">
+                <a href="units.html" class="nav-link">
                     <i class="fas fa-users"></i>
                     Юниты
+                </a>
+                <a href="contact.html" class="nav-link">
+                    <i class="fas fa-envelope"></i>
+                    Связь
                 </a>
             </nav>
         </div>
     </header>
 
-    <!-- БАННЕР -->
+    <!-- БАННЕР (под хедером) -->
     <div class="banner-container">
+        <img src="assets/images/banner.png" alt="Эпоха викингов" class="banner-image">
         <div class="banner-overlay">
             <h2>Эпоха Мечей и Славы</h2>
             <p>Стратегическая настольная игра</p>
         </div>
-        <img src="assets/images/banner.png" alt="Эпоха викингов" class="banner-image" loading="eager">
     </div>
 
-    <!-- ОСНОВНОЕ МЕНЮ -->
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
     <main class="container">
-        <div class="welcome-text">
-            <h2>Добро пожаловать в мир варгейма "Викинги"!</h2>
-            <p>Выберите раздел для изучения:</p>
+        <div class="welcome-section">
+            <h1>Добро пожаловать в варгейм "Викинги"!</h1>
+            <p class="intro-text">
+                Погрузитесь в эпическое противостояние эпохи викингов. Соберите свою армию, 
+                разработайте стратегию и ведите свои войска к победе в легендарных сражениях.
+            </p>
         </div>
 
-        <nav class="main-nav">
-            <a href="rules/" class="nav-card">
-                <div class="nav-icon">
-                    <i class="fas fa-scroll"></i>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-dice-d20"></i>
                 </div>
-                <div class="nav-text">
-                    <h3>Правила игры</h3>
-                    <p>Базовые и продвинутые правила варгейма</p>
-                </div>
-                <div class="nav-arrow">
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-            </a>
-
-            <a href="factions/" class="nav-card">
-                <div class="nav-icon">
-                    <i class="fas fa-flag"></i>
-                </div>
-                <div class="nav-text">
-                    <h3>Фракции</h3>
-                    <p>Армии Северян, Саксов и других</p>
-                </div>
-                <div class="nav-arrow">
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-            </a>
-
-            <a href="units/" class="nav-card">
-                <div class="nav-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <div class="nav-text">
-                    <h3>Юниты</h3>
-                    <p>Все типы войск и их характеристики</p>
-                </div>
-                <div class="nav-arrow">
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-            </a>
-
-            <a href="contact.html" class="nav-card">
-                <div class="nav-icon">
-                    <i class="fas fa-envelope"></i>
-                </div>
-                <div class="nav-text">
-                    <h3>Связь</h3>
-                    <p>Telegram-канал и обратная связь</p>
-                </div>
-                <div class="nav-arrow">
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-            </a>
-        </nav>
-
-        <div class="quick-info">
-            <div class="info-card">
-                <i class="fas fa-dice"></i>
-                <h4>Простая механика</h4>
-                <p>Игра основана на кубиках D6</p>
+                <h3>Простая механика</h3>
+                <p>Игра основана на кубиках D6 с интуитивными правилами</p>
             </div>
-            <div class="info-card">
-                <i class="fas fa-clock"></i>
-                <h4>Быстрые партии</h4>
-                <p>30-60 минут на игру</p>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chess-board"></i>
+                </div>
+                <h3>Глубокие стратегии</h3>
+                <p>Каждая партия требует тактического мышления и планирования</p>
             </div>
-            <div class="info-card">
-                <i class="fas fa-user-friends"></i>
-                <h4>2-4 игрока</h4>
-                <p>Идеально для компании</p>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-friends"></i>
+                </div>
+                <h3>2-4 игрока</h3>
+                <p>Идеально для вечера с друзьями или семейной игры</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-hourglass-half"></i>
+                </div>
+                <h3>30-60 минут</h3>
+                <p>Оптимальное время для динамичных партий</p>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>Начните своё путешествие!</h2>
+            <p>Изучите правила, выберите фракцию и вступите в бой</p>
+            <div class="cta-buttons">
+                <a href="rules.html" class="cta-button primary">
+                    <i class="fas fa-book"></i>
+                    Читать правила
+                </a>
+                <a href="factions.html" class="cta-button secondary">
+                    <i class="fas fa-shield-alt"></i>
+                    Выбрать фракцию
+                </a>
             </div>
         </div>
     </main>
@@ -134,33 +117,18 @@
     <!-- ФУТЕР -->
     <footer class="main-footer">
         <div class="footer-content">
-            <div class="footer-section">
+            <div class="footer-logo-section">
                 <div class="footer-logo">
-                    <i class="fas fa-shield-alt"></i>
+                    <i class="fas fa-helmet-battle"></i>
                     <span>ВИКИНГИ</span>
                 </div>
-                <p class="footer-tagline">Стратегия. Тактика. Слава.</p>
+                <p class="footer-tagline">Стратегия эпохи викингов</p>
             </div>
             
-            <div class="footer-section">
-                <h4>Быстрые ссылки</h4>
-                <div class="footer-links">
-                    <a href="rules/">Правила</a>
-                    <a href="factions/">Фракции</a>
-                    <a href="units/">Юниты</a>
-                    <a href="contact.html">Контакты</a>
-                </div>
-            </div>
-            
-            <div class="footer-section">
-                <h4>Проект</h4>
+            <div class="footer-copyright">
                 <p>© 2025 Варгейм "Викинги"</p>
-                <p>Неофициальный фанатский проект</p>
+                <p>Все материалы предоставлены для ознакомления</p>
             </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>Создано с <i class="fas fa-heart"></i> для любителей варгеймов</p>
         </div>
     </footer>
 
