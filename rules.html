@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Правила игры - Викинги</title>
+    <base href="https://viyar-888.github.io/vikings_game_ru/">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-section">
+                <h1 class="logo">
+                    <a href="index.html">
+                        <i class="fas fa-helmet-battle"></i>
+                        <span>ВИКИНГИ</span>
+                    </a>
+                </h1>
+                <p class="subtitle">Стратегический варгейм</p>
+            </div>
+            <nav class="header-nav">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Главная
+                </a>
+                <a href="rules.html" class="nav-link active">
+                    <i class="fas fa-scroll"></i>
+                    Правила
+                </a>
+                <a href="factions.html" class="nav-link">
+                    <i class="fas fa-flag"></i>
+                    Фракции
+                </a>
+                <a href="units.html" class="nav-link">
+                    <i class="fas fa-users"></i>
+                    Юниты
+                </a>
+                <a href="contact.html" class="nav-link">
+                    <i class="fas fa-envelope"></i>
+                    Связь
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="page-header">
+            <div class="breadcrumb">
+                <a href="index.html"><i class="fas fa-home"></i> Главная</a>
+                <span class="separator">/</span>
+                <span class="current">Правила игры</span>
+            </div>
+            <h1><i class="fas fa-scroll"></i> Правила игры</h1>
+            <p class="page-description">Полные правила варгейма "Викинги"</p>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="markdown-content" id="markdown-content">
+                <!-- Markdown будет загружен сюда -->
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Загрузка правил...</p>
+                </div>
+            </div>
+
+            <div class="content-actions">
+                <a href="index.html" class="back-button">
+                    <i class="fas fa-arrow-left"></i>
+                    На главную
+                </a>
+                <button class="print-button" onclick="window.print()">
+                    <i class="fas fa-print"></i>
+                    Распечатать
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo-section">
+                <div class="footer-logo">
+                    <i class="fas fa-helmet-battle"></i>
+                    <span>ВИКИНГИ</span>
+                </div>
+                <p class="footer-tagline">Стратегия эпохи викингов</p>
+            </div>
+            
+            <div class="footer-copyright">
+                <p>© 2025 Варгейм "Викинги"</p>
+                <p>Все материалы предоставлены для ознакомления</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Загружаем правила при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            loadMarkdownFile('md-rules/basic.md');
+        });
+    </script>
+</body>
+</html>
