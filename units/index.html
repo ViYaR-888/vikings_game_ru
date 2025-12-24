@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Юниты - Викинги</title>
+    <base href="/vikings_game_ru/">
+    <style>
+        :root {
+            --heading-font: Georgia, serif;
+            --body-font: Arial, sans-serif;
+        }
+        body {
+            font-family: var(--body-font);
+        }
+        h1, h2, h3, h4 {
+            font-family: var(--heading-font);
+        }
+    </style>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <h1 class="logo"><a href="/vikings_game_ru/">Викинги</a></h1>
+    </header>
+
+    <main class="container">
+        <div class="markdown-content" id="units-list">
+            <h1>🛡️ Юниты</h1>
+            <ul>
+                <li><a href="#" onclick="loadMarkdown('units/infantry.md')">Пехота</a></li>
+                <li><a href="#" onclick="loadMarkdown('units/cavalry.md')">Кавалерия</a></li>
+            </ul>
+            <div id="markdown-content"></div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2025 Варгейм "Викинги"</p>
+    </footer>
+
+    <script>
+        async function loadMarkdown(file) {
+            const response = await fetch(file);
+            const markdown = await response.text();
+            document.getElementById('markdown-content').innerHTML = marked.parse(markdown);
+        }
+    </script>
+</body>
+</html>
