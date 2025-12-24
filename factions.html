@@ -34,10 +34,6 @@
                     <i class="fas fa-flag"></i>
                     Фракции
                 </a>
-                <a href="units.html" class="nav-link">
-                    <i class="fas fa-users"></i>
-                    Юниты
-                </a>
                 <a href="contact.html" class="nav-link">
                     <i class="fas fa-envelope"></i>
                     Связь
@@ -59,35 +55,67 @@
 
         <div class="content-wrapper">
             <div class="markdown-content" id="markdown-content">
-                <!-- Markdown будет загружен сюда -->
                 <div class="loading">
                     <i class="fas fa-spinner fa-spin"></i>
-                    <p>Загрузка фракций...</p>
+                    <p>Выберите фракцию для просмотра</p>
                 </div>
             </div>
 
             <div class="factions-grid">
-                <a href="#" onclick="loadMarkdownFile('md-rules/norse.md'); return false;" class="faction-card">
+                <a href="#" onclick="loadMarkdownFile('md-rules/scandinavia.md'); return false;" class="faction-card">
                     <div class="faction-icon">
                         <i class="fas fa-ship"></i>
                     </div>
-                    <h3>Северяне</h3>
-                    <p>Викинги и морские воины</p>
+                    <h3>1. Скандинавия</h3>
+                    <p>Викинги и северные воины</p>
                 </a>
                 
-                <a href="#" onclick="loadMarkdownFile('md-rules/saxons.md'); return false;" class="faction-card">
+                <a href="#" onclick="loadMarkdownFile('md-rules/west_frankish.md'); return false;" class="faction-card">
+                    <div class="faction-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3>2. Западно-Франкское королевство</h3>
+                    <p>Каролингская империя</p>
+                </a>
+                
+                <a href="#" onclick="loadMarkdownFile('md-rules/wessex.md'); return false;" class="faction-card">
                     <div class="faction-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h3>Саксы</h3>
-                    <p>Англосаксонские королевства</p>
+                    <h3>3. Королевство Уэссекс</h3>
+                    <p>Англосаксонское королевство</p>
                 </a>
-            </div>
-
-            <div class="content-actions">
-                <a href="index.html" class="back-button">
-                    <i class="fas fa-arrow-left"></i>
-                    На главную
+                
+                <a href="#" onclick="loadMarkdownFile('md-rules/abbasid.md'); return false;" class="faction-card">
+                    <div class="faction-icon">
+                        <i class="fas fa-mosque"></i>
+                    </div>
+                    <h3>4. Аббасидский халифат</h3>
+                    <p>Исламский халифат</p>
+                </a>
+                
+                <a href="#" onclick="loadMarkdownFile('md-rules/byzantine.md'); return false;" class="faction-card">
+                    <div class="faction-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3>5. Византийская империя</h3>
+                    <p>Восточная Римская империя</p>
+                </a>
+                
+                <a href="#" onclick="loadMarkdownFile('md-rules/alba.md'); return false;" class="faction-card">
+                    <div class="faction-icon">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <h3>6. Королевство Альба</h3>
+                    <p>Шотландское королевство</p>
+                </a>
+                
+                <a href="#" onclick="loadMarkdownFile('md-rules/ireland.md'); return false;" class="faction-card">
+                    <div class="faction-icon">
+                        <i class="fas fa-clover"></i>
+                    </div>
+                    <h3>7. Ирландия</h3>
+                    <p>Гэльские королевства</p>
                 </a>
             </div>
         </div>
@@ -114,7 +142,7 @@
     <script>
         // Загружаем первую фракцию при загрузке страницы
         document.addEventListener('DOMContentLoaded', function() {
-            loadMarkdownFile('md-rules/norse.md');
+            loadMarkdownFile('md-rules/scandinavia.md');
         });
     </script>
 </body>
