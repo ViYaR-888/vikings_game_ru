@@ -48,8 +48,8 @@ async function loadMarkdownFile(mdFile) {
         
         const markdown = await response.text();
         
-        // Конвертируем Markdown в HTML
-        const html = parseMarkdown(markdown);
+        // Конвертируем Markdown в HTML с улучшенным парсером
+        const html = parseMarkdownEnhanced(markdown);
         
         // Вставляем HTML в контейнер
         container.innerHTML = html;
@@ -72,7 +72,19 @@ async function loadMarkdownFile(mdFile) {
                     <h3><i class="fas fa-exclamation-triangle"></i> Ошибка загрузки</h3>
                     <p>Не удалось загрузить контент.</p>
                     <p><small>${error.message}</small></p>
-                    <button onclick="location.reload()" class="back-button">
+                    <button onclick="location.reload()" style="
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 10px;
+                        padding: 12px 25px;
+                        background: var(--primary-brown);
+                        color: white;
+                        border-radius: 6px;
+                        border: 2px solid var(--primary-gold);
+                        cursor: pointer;
+                        font-family: var(--font-body);
+                        font-size: 1rem;
+                    ">
                         <i class="fas fa-redo"></i> Обновить страницу
                     </button>
                 </div>
@@ -81,97 +93,176 @@ async function loadMarkdownFile(mdFile) {
     }
 }
 
-// ===== ПАРСЕР MARKDOWN =====
-function parseMarkdown(markdown) {
-    // Базовый парсер Markdown
-    return markdown
-        // Заголовки
-        .replace(/^# (.*$)/gm, '<h1>$1</h1>')
-        .replace(/^## (.*$)/gm, '<h2>$1</h2>')
-        .replace(/^### (.*$)/gm, '<h3>$1</h3>')
-        .replace(/^#### (.*$)/gm, '<h4>$1</h4>')
+// ===== УЛУЧШЕННЫЙ ПАРСЕР MARKDOWN =====
+function parseMarkdownEnhanced(markdown) {
+    let html = markdown;
+    
+    // 1. Обработка заголовков
+    html = html.replace(/^# (.*?)$/gm, '<h1>$1</h1>');
+    html = html.replace(/^## (.*?)$/gm, '<h2>$1</h2>');
+    html = html.replace(/^### (.*?)$/gm, '<h3>$1</h3>');
+    html = html.replace(/^#### (.*?)$/gm, '<h4>$1</h4>');
+    html = html.replace(/^##### (.*?)$/gm, '<h5>$1</h5>');
+    html = html.replace(/^###### (.*?)$/gm, '<h6>$1</h6>');
+    
+    // 2. Жирный текст
+    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/__(.*?)__/g, '<strong>$1</strong>');
+    
+    // 3. Курсив
+    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    html = html.replace(/_(.*?)_/g, '<em>$1</em>');
+    
+    // 4. Зачёркнутый текст
+    html = html.replace(/~~(.*?)~~/g, '<del>$1</del>');
+    
+    // 5. Улучшенная обработка списков
+    const lines = html.split('\n');
+    let inList = false;
+    let listType = ''; // 'ul' или 'ol'
+    let resultLines = [];
+    
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
         
-        // Жирный текст
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        .replace(/__(.*?)__/g, '<strong>$1</strong>')
+        // Проверяем, является ли строка элементом списка
+        const isUnorderedItem = line.match(/^[*+-]\s+(.*)/);
+        const isOrderedItem = line.match(/^\d+\.\s+(.*)/);
         
-        // Курсив
-        .replace(/\*(.*?)\*/g, '<em>$1</em>')
-        .replace(/_(.*?)_/g, '<em>$1</em>')
-        
-        // Зачёркнутый текст
-        .replace(/~~(.*?)~~/g, '<del>$1</del>')
-        
-        // Списки
-        .replace(/^\* (.*$)/gm, '<li>$1</li>')
-        .replace(/^- (.*$)/gm, '<li>$1</li>')
-        .replace(/^\+ (.*$)/gm, '<li>$1</li>')
-        .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>')
-        
-        // Нумерованные списки
-        .replace(/^\d+\. (.*$)/gm, '<li>$1</li>')
-        .replace(/(<li>.*<\/li>)/gs, function(match) {
-            if (match.includes('<ul>')) return match;
-            return '<ol>' + match + '</ol>';
-        })
-        
-        // Ссылки
-        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
-        
-        // Изображения
-        .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="markdown-image">')
-        
-        // Код
-        .replace(/`([^`]+)`/g, '<code>$1</code>')
-        .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
-        
-        // Цитаты
-        .replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>')
-        
-        // Горизонтальная линия
-        .replace(/^---$/gm, '<hr>')
-        .replace(/^___$/gm, '<hr>')
-        .replace(/^\*\*\*$/gm, '<hr>')
-        
-        // Таблицы (простая поддержка)
-        .replace(/^\|(.+)\|$/gm, function(match, row) {
-            const cells = row.split('|').map(cell => cell.trim()).filter(cell => cell);
-            if (cells.length === 0) return '';
+        if (isUnorderedItem || isOrderedItem) {
+            const isCurrentUnordered = !!isUnorderedItem;
+            const content = isUnorderedItem ? isUnorderedItem[1] : isOrderedItem[1];
             
-            // Если строка содержит только ---, это разделитель заголовка
-            if (cells.every(cell => /^[-:]+$/.test(cell))) {
-                return '';
+            // Если это начало списка
+            if (!inList) {
+                listType = isCurrentUnordered ? 'ul' : 'ol';
+                resultLines.push(`<${listType}>`);
+                inList = true;
+            }
+            // Если тип списка изменился
+            else if ((isCurrentUnordered && listType === 'ol') || 
+                     (!isCurrentUnordered && listType === 'ul')) {
+                resultLines.push(`</${listType}>`);
+                listType = isCurrentUnordered ? 'ul' : 'ol';
+                resultLines.push(`<${listType}>`);
             }
             
-            const rowHtml = cells.map(cell => `<td>${cell}</td>`).join('');
-            return `<tr>${rowHtml}</tr>`;
-        })
-        .replace(/(<tr>[\s\S]*?<\/tr>)/gs, function(match) {
-            if (match.includes('<table>')) return match;
-            return `<table>${match}</table>`;
-        })
+            resultLines.push(`<li>${processInlineMarkdown(content)}</li>`);
+        } 
+        // Если строка не является элементом списка, но мы были в списке
+        else if (inList) {
+            resultLines.push(`</${listType}>`);
+            inList = false;
+            listType = '';
+            resultLines.push(line);
+        } 
+        // Обычная строка
+        else {
+            resultLines.push(line);
+        }
+    }
+    
+    // Закрываем список, если он остался открытым
+    if (inList) {
+        resultLines.push(`</${listType}>`);
+    }
+    
+    html = resultLines.join('\n');
+    
+    // 6. Улучшенная обработка таблиц
+    html = html.replace(/\n([|].*[|]\n)([-:| ]+[|]*)+\n([|].*[|]\n?)+/g, function(match) {
+        const rows = match.trim().split('\n');
+        let tableHtml = '<table>';
         
-        // Переносы строк
-        .replace(/\n\n/g, '</p><p>')
-        .replace(/([^\n])\n([^\n])/g, '$1<br>$2')
+        for (let i = 0; i < rows.length; i++) {
+            const cells = rows[i].split('|').filter(cell => cell.trim() !== '');
+            
+            // Пропускаем строку-разделитель
+            if (cells.every(cell => /^[-: ]+$/.test(cell.trim()))) {
+                continue;
+            }
+            
+            const tag = (i === 0) ? 'th' : 'td';
+            tableHtml += '<tr>';
+            
+            cells.forEach(cell => {
+                tableHtml += `<${tag}>${cell.trim()}</${tag}>`;
+            });
+            
+            tableHtml += '</tr>';
+        }
         
-        // Обрамляем в параграфы
-        .replace(/^(?!<[a-z]).*$/gm, '<p>$&</p>')
+        tableHtml += '</table>';
+        return tableHtml;
+    });
+    
+    // 7. Блоки кода
+    html = html.replace(/```([\s\S]*?)```/g, function(match, code) {
+        return `<pre><code>${escapeHtml(code.trim())}</code></pre>`;
+    });
+    
+    // 8. Встроенный код
+    html = html.replace(/`([^`]+)`/g, function(match, code) {
+        return `<code>${escapeHtml(code)}</code>`;
+    });
+    
+    // 9. Цитаты
+    html = html.replace(/^> (.*)$/gm, '<blockquote>$1</blockquote>');
+    
+    // 10. Горизонтальные линии
+    html = html.replace(/^---$/gm, '<hr>');
+    html = html.replace(/^___$/gm, '<hr>');
+    html = html.replace(/^\*\*\*$/gm, '<hr>');
+    
+    // 11. Ссылки
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+    
+    // 12. Изображения
+    html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="markdown-image">');
+    
+    // 13. Параграфы (обработка последней)
+    const paragraphs = html.split('\n\n');
+    html = paragraphs.map(paragraph => {
+        const trimmed = paragraph.trim();
+        if (!trimmed) return '';
         
-        // Убираем лишние параграфы внутри других элементов
-        .replace(/<p><(h[1-6]|ul|ol|li|blockquote|pre|table|tr|td|th)>/g, '<$1>')
-        .replace(/<\/(h[1-6]|ul|ol|li|blockquote|pre|table|tr|td|th)><\/p>/g, '</$1>')
+        // Не оборачиваем в <p> если уже есть другие теги
+        if (trimmed.match(/^<(\w+)[^>]*>/) || 
+            trimmed.match(/^<(\/)?(h[1-6]|ul|ol|li|blockquote|pre|table|tr|td|th|img|a|code|strong|em|del)>/i)) {
+            return trimmed;
+        }
         
-        // Очищаем пустые параграфы
-        .replace(/<p><\/p>/g, '')
-        .replace(/<p>\s*<\/p>/g, '');
+        return `<p>${processInlineMarkdown(trimmed)}</p>`;
+    }).join('\n');
+    
+    // 14. Чистка лишних переносов
+    html = html.replace(/\n{3,}/g, '\n\n');
+    
+    return html;
+}
+
+// Обработка инлайн-разметки внутри текста
+function processInlineMarkdown(text) {
+    return text
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/`([^`]+)`/g, '<code>$1</code>')
+        .replace(/~~(.*?)~~/g, '<del>$1</del>')
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+}
+
+// Экранирование HTML
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
 }
 
 // ===== ZOOM ИЗОБРАЖЕНИЙ =====
 function initImageZoom() {
     document.querySelectorAll('.markdown-image').forEach(img => {
         // Пропускаем маленькие изображения
-        if (img.naturalWidth < 100 || img.naturalHeight < 100) return;
+        if (img.naturalWidth < 100 && img.naturalHeight < 100) return;
         
         img.style.cursor = 'zoom-in';
         
@@ -222,6 +313,7 @@ function initImageZoom() {
                 align-items: center;
                 justify-content: center;
                 transition: all 0.3s ease;
+                z-index: 10000;
             `;
             closeBtn.onmouseover = () => closeBtn.style.background = 'rgba(212, 160, 23, 0.9)';
             closeBtn.onmouseout = () => closeBtn.style.background = 'rgba(0,0,0,0.7)';
@@ -278,12 +370,22 @@ function initMobileSupport() {
             element.style.minWidth = '44px';
         });
     }
+    
+    // Исправляем viewport для iOS
+    function setViewportHeight() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    
+    setViewportHeight();
+    window.addEventListener('resize', setViewportHeight);
+    window.addEventListener('orientationchange', setViewportHeight);
 }
 
 // ===== ГЛОБАЛЬНЫЕ ФУНКЦИИ =====
 // Делаем функции доступными глобально
 window.loadMarkdownFile = loadMarkdownFile;
-window.parseMarkdown = parseMarkdown;
+window.parseMarkdownEnhanced = parseMarkdownEnhanced;
 
 // Добавляем стили для анимаций
 const style = document.createElement('style');
@@ -319,6 +421,19 @@ style.textContent = `
     
     .error-message i {
         margin-right: 10px;
+    }
+    
+    /* Улучшенная прокрутка для таблиц на мобильных */
+    @media (max-width: 768px) {
+        .markdown-content {
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .markdown-content table {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+        }
     }
 `;
 document.head.appendChild(style);
