@@ -19,7 +19,6 @@
                         <span>ВИКИНГИ</span>
                     </a>
                 </h1>
-                <p class="subtitle">Стратегический варгейм</p>
             </div>
             <nav class="header-nav">
                 <a href="index.html" class="nav-link">
@@ -50,14 +49,16 @@
                 <span class="current">Фракции</span>
             </div>
             <h1><i class="fas fa-flag"></i> Фракции</h1>
-            <p class="page-description">Выберите свою армию для сражения</p>
+            <p class="page-description">Выберите свою армию для сражения. Кликните на фракцию для просмотра деталей.</p>
         </div>
 
         <div class="content-wrapper">
             <div class="markdown-content" id="markdown-content">
-                <div class="loading">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <p>Выберите фракцию для просмотра</p>
+                <!-- Содержимое будет загружено здесь -->
+                <div style="text-align: center; padding: 40px; color: var(--primary-brown);">
+                    <i class="fas fa-hand-point-up" style="font-size: 3rem; color: var(--primary-gold); margin-bottom: 20px; display: block;"></i>
+                    <h2 style="color: var(--primary-dark); margin-bottom: 15px;">Выберите фракцию</h2>
+                    <p>Нажмите на одну из карточек ниже, чтобы увидеть подробное описание фракции, её особенности и характеристики.</p>
                 </div>
             </div>
 
@@ -128,7 +129,6 @@
                     <i class="fas fa-helmet-battle"></i>
                     <span>ВИКИНГИ</span>
                 </div>
-                <p class="footer-tagline">Стратегия эпохи викингов</p>
             </div>
             
             <div class="footer-copyright">
@@ -139,11 +139,5 @@
     </footer>
 
     <script src="assets/js/main.js"></script>
-    <script>
-        // Загружаем первую фракцию при загрузке страницы
-        document.addEventListener('DOMContentLoaded', function() {
-            loadMarkdownFile('md-rules/scandinavia.md');
-        });
-    </script>
 </body>
 </html>
