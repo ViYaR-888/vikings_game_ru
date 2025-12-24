@@ -1,78 +1,58 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Управление размером шрифта
-    const fontButtons = document.querySelectorAll('.font-btn');
-    const htmlElement = document.documentElement;
-
-    // Загружаем сохраненные настройки
-    const savedFontSize = localStorage.getItem('vikingsFontSize') || 'medium';
-    htmlElement.setAttribute('data-font-size', savedFontSize);
-    document.querySelector(`.font-btn[data-size="${savedFontSize}"]`).disabled = true;
-
-    fontButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            fontButtons.forEach(btn => {
-                btn.disabled = false;
-                btn.classList.remove('active');
-            });
-            this.disabled = true;
-            this.classList.add('active');
-
-            const size = this.getAttribute('data-size');
-            htmlElement.setAttribute('data-font-size', size);
-            localStorage.setItem('vikingsFontSize', size);
-            applyFontSize(size);
-        });
-    });
-
-    function applyFontSize(size) {
-        let baseSize;
-        switch(size) {
-            case 'small':
-                baseSize = '14px';
-                break;
-            case 'large':
-                baseSize = '18px';
-                break;
-            default:
-                baseSize = '16px';
-        }
-        document.documentElement.style.fontSize = baseSize;
-    }
-
-    // Обработка изображений
-    document.querySelectorAll('img.content-image').forEach(img => {
-        img.style.cursor = 'pointer';
-        img.addEventListener('click', function(e) {
-            e.preventDefault();
-            const newTab = window.open(this.src, '_blank');
-            if (newTab) newTab.focus();
-        });
-    });
-
-    // Защита от случайного скролла на мобильных
-    let touchStartY = 0;
-    let touchEndY = 0;
-
-    document.addEventListener('touchstart', function(e) {
-        touchStartY = e.touches[0].clientY;
-    });
-
-    document.addEventListener('touchend', function(e) {
-        touchEndY = e.changedTouches[0].clientY;
-        const diff = touchStartY - touchEndY;
-        if (Math.abs(diff) > 50) return;
-        if (Math.abs(diff) > 10) {
+    // 1. Защита от случайного масштабирования на мобильных устройствах
+    document.addEventListener('touchmove', function(e) {
+        if (e.scale !== 1) {
             e.preventDefault();
         }
     }, { passive: false });
 
-    // Защита от контекстного меню на мобильных
-    document.addEventListener('contextmenu', function(e) {
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    // 2. Добавляем класс для мобильных устройств (для адаптивных стилей)
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        document.body.classList.add('is-mobile');
+    }
+
+    // 3. Управление размером шрифта (если нужно)
+    const fontButtons = document.querySelectorAll('.font-btn');
+    if (fontButtons.length > 0) {
+        const htmlElement = document.documentElement;
+        const savedFontSize = localStorage.getItem('vikingsFontSize') || 'medium';
+        htmlElement.setAttribute('data-font-size', savedFontSize);
+
+        fontButtons.forEach(button => {
+            if (button.getAttribute('data-size') === savedFontSize) {
+                button.disabled = true;
+            }
+            button.addEventListener('click', function() {
+                fontButtons.forEach(btn => {
+                    btn.disabled = false;
+                });
+                this.disabled = true;
+                const size = this.getAttribute('data-size');
+                htmlElement.setAttribute('data-font-size', size);
+                localStorage.setItem('vikingsFontSize', size);
+            });
+        });
+    }
+
+    // 4. Обработка кликов по изображениям (открытие в новой вкладке)
+    document.querySelectorAll('img.content-image').forEach(img => {
+        img.addEventListener('click', function(e) {
             e.preventDefault();
-        }
+            window.open(this.src, '_blank');
+        });
     });
 
-    // Применяем сохраненный размер шрифта
-    applyFontSize(savedFontSize);
+    // 5. Загрузка Markdown-контента (если есть)
+    if (window.loadMarkdown) return; // Избегаем повторного объявления
+    window.loadMarkdown = async function(file, containerId = 'markdown-content') {
+        try {
+            const response = await fetch(file);
+            if (!response.ok) throw new Error('Файл не найден');
+            const markdown = await response.text();
+            const html = marked.parse(markdown);
+            document.getElementById(containerId).innerHTML = html;
+        } catch (error) {
+            document.getElementById(containerId).innerHTML = `<p>Ошибка загрузки: ${error.message}</p>`;
+        }
+    };
 });
