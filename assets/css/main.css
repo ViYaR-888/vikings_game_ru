@@ -88,6 +88,8 @@ body {
     z-index: 1000;
     box-shadow: var(--shadow-md);
     border-bottom: 3px solid var(--primary-gold);
+    width: 100%;
+    overflow: hidden;
 }
 
 .header-container {
@@ -98,23 +100,28 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
 .logo-section {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .logo {
     font-family: var(--font-heading);
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 900;
     display: flex;
     align-items: center;
     gap: 10px;
     color: var(--light-text);
     text-decoration: none;
+    justify-content: center;
+    width: 100%;
 }
 
 .logo a {
@@ -123,23 +130,17 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    justify-content: center;
 }
 
 .logo i {
     color: var(--primary-gold);
 }
 
-.subtitle {
-    font-size: 0.9rem;
-    opacity: 0.9;
-    font-weight: 300;
-    margin-left: 40px; /* Совпадает с отступом иконки */
-}
-
 .header-nav {
     display: flex;
     gap: 5px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .nav-link {
@@ -221,6 +222,8 @@ body {
     margin: 0 auto 60px;
     padding: 0 20px;
     flex: 1;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 /* ===== ГЛАВНАЯ СТРАНИЦА ===== */
@@ -247,7 +250,7 @@ body {
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 30px;
     margin-bottom: 60px;
 }
@@ -263,6 +266,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 .feature-card:hover {
@@ -295,21 +300,6 @@ body {
     color: var(--primary-brown);
     line-height: 1.5;
     text-align: center;
-}
-
-/* Центрируем последнюю карточку в ряду из 4 */
-.features-grid .feature-card:nth-child(4) {
-    grid-column: span 1;
-}
-
-@media (min-width: 1024px) {
-    .features-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-    .features-grid .feature-card:nth-child(4) {
-        grid-column: 3;
-        justify-self: center;
-    }
 }
 
 .cta-section {
@@ -382,6 +372,7 @@ body {
     margin-bottom: 40px;
     padding: 20px 0;
     border-bottom: 2px solid var(--border-color);
+    width: 100%;
 }
 
 .breadcrumb {
@@ -440,12 +431,15 @@ body {
     border: 1px solid var(--border-color);
     overflow: hidden;
     margin-bottom: 40px;
+    width: 100%;
 }
 
-/* ===== MARKDOWN КОНТЕНТ (УЛУЧШЕННЫЙ) ===== */
+/* ===== MARKDOWN КОНТЕНТ ===== */
 .markdown-content {
     padding: 40px;
     min-height: 400px;
+    width: 100%;
+    overflow-x: auto;
 }
 
 .markdown-content .loading {
@@ -579,7 +573,7 @@ body {
     display: block;
 }
 
-/* ===== УЛУЧШЕННЫЕ ТАБЛИЦЫ ===== */
+/* ===== ИСПРАВЛЕННЫЕ ТАБЛИЦЫ ===== */
 .markdown-content table {
     width: 100%;
     margin: 1.5em 0;
@@ -599,7 +593,7 @@ body {
 }
 
 .markdown-content table th {
-    color: white;
+    color: white !important; /* ИСПРАВЛЕНО: белый текст на тёмном фоне */
     font-weight: 600;
     text-align: left;
     padding: 15px;
@@ -618,6 +612,7 @@ body {
     border-bottom: 1px solid var(--border-color);
     border-right: 1px solid var(--border-color);
     vertical-align: top;
+    color: var(--dark-text);
 }
 
 .markdown-content table td:last-child {
@@ -640,7 +635,6 @@ body {
     background: rgba(212, 196, 168, 0.2);
 }
 
-/* ===== ИЗОБРАЖЕНИЯ И ССЫЛКИ ===== */
 .markdown-content img {
     max-width: 100%;
     height: auto;
@@ -734,6 +728,7 @@ body {
 /* ===== КОНТАКТЫ ===== */
 .contact-content {
     padding: 40px;
+    width: 100%;
 }
 
 .contact-card {
@@ -743,6 +738,9 @@ body {
     border-radius: var(--border-radius-lg);
     border: 2px solid var(--border-color);
     margin-bottom: 30px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .contact-icon {
@@ -799,6 +797,9 @@ body {
     background: rgba(212, 160, 23, 0.1);
     border-radius: var(--border-radius);
     border-left: 4px solid var(--primary-gold);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .contact-info h3 {
@@ -808,11 +809,14 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    justify-content: center;
 }
 
 .contact-info ul {
     list-style: none;
     padding: 0;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .contact-info li {
@@ -821,11 +825,13 @@ body {
     align-items: center;
     gap: 15px;
     font-size: 1.05rem;
+    justify-content: flex-start;
 }
 
 .contact-info li i {
     color: var(--primary-gold);
     width: 20px;
+    text-align: center;
 }
 
 /* ===== ФУТЕР ===== */
@@ -834,6 +840,8 @@ body {
     color: var(--light-text);
     margin-top: auto;
     border-top: 3px solid var(--primary-gold);
+    width: 100%;
+    overflow: hidden;
 }
 
 .footer-content {
@@ -843,12 +851,15 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
 .footer-logo-section {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .footer-logo {
@@ -856,23 +867,18 @@ body {
     align-items: center;
     gap: 10px;
     font-family: var(--font-heading);
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: var(--light-text);
+    justify-content: center;
+    width: 100%;
 }
 
 .footer-logo i {
     color: var(--primary-gold);
 }
 
-.footer-tagline {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    font-style: italic;
-    margin-left: 40px; /* Совпадает с отступом иконки */
-}
-
 .footer-copyright {
-    text-align: right;
+    text-align: center;
 }
 
 .footer-copyright p:first-child {
@@ -886,6 +892,16 @@ body {
 }
 
 /* ===== АДАПТИВНОСТЬ ===== */
+@media (max-width: 1200px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .factions-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 @media (max-width: 1024px) {
     .banner-container {
         height: 250px;
@@ -899,10 +915,6 @@ body {
         font-size: 2.2rem;
     }
     
-    .features-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
     .factions-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -913,41 +925,42 @@ body {
         --header-height: auto;
     }
     
+    .main-header {
+        padding: 0;
+    }
+    
     .header-container {
         flex-direction: column;
         padding: 15px;
         height: auto;
-        align-items: stretch;
+        align-items: center;
+        width: 100%;
     }
     
     .logo-section {
-        text-align: center;
-        align-items: center;
         margin-bottom: 15px;
+        width: 100%;
     }
     
-    .subtitle {
-        margin-left: 0;
-        text-align: center;
+    .logo {
+        justify-content: center;
+        font-size: 1.8rem;
     }
     
     .header-nav {
         width: 100%;
         justify-content: center;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        padding: 10px 0;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .header-nav::-webkit-scrollbar {
-        display: none;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 0;
     }
     
     .nav-link {
-        padding: 8px 12px;
+        padding: 10px;
         font-size: 0.9rem;
-        flex-shrink: 0;
+        flex: 1;
+        min-width: 120px;
+        justify-content: center;
     }
     
     .banner-container {
@@ -963,6 +976,17 @@ body {
         font-size: 1.1rem;
     }
     
+    .container {
+        padding: 0 15px;
+        margin: 0 auto 40px;
+        width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .welcome-section {
+        padding: 0 15px;
+    }
+    
     .welcome-section h1 {
         font-size: 1.8rem;
     }
@@ -974,14 +998,16 @@ body {
     .features-grid {
         grid-template-columns: 1fr;
         gap: 20px;
+        padding: 0 15px;
     }
     
-    .features-grid .feature-card:nth-child(4) {
-        grid-column: 1;
+    .feature-card {
+        padding: 25px;
     }
     
     .cta-section {
         padding: 30px 20px;
+        margin: 30px 15px 0;
     }
     
     .cta-section h2 {
@@ -991,47 +1017,108 @@ body {
     .cta-buttons {
         flex-direction: column;
         align-items: center;
+        gap: 15px;
     }
     
     .cta-button {
         width: 100%;
         max-width: 300px;
         justify-content: center;
+        padding: 15px;
+    }
+    
+    .page-header {
+        padding: 15px 0;
     }
     
     .page-header h1 {
         font-size: 2rem;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .page-description {
+        text-align: center;
     }
     
     .markdown-content {
         padding: 25px;
-        overflow-x: auto;
+        width: 100%;
+        box-sizing: border-box;
     }
     
     .factions-grid {
         grid-template-columns: 1fr;
-        margin: 20px;
-        padding: 10px;
+        margin: 20px 15px;
+        padding: 15px;
+        gap: 15px;
+    }
+    
+    .faction-card {
+        padding: 20px;
+        min-height: 180px;
+    }
+    
+    .faction-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .contact-content {
+        padding: 25px 15px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .contact-card {
+        padding: 30px 20px;
+        margin: 0 0 25px 0;
+        width: 100%;
+    }
+    
+    .contact-icon {
+        width: 80px;
+        height: 80px;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+    
+    .contact-card h2 {
+        font-size: 1.8rem;
+    }
+    
+    .telegram-button {
+        width: 100%;
+        justify-content: center;
+        padding: 15px;
+        font-size: 1.1rem;
+    }
+    
+    .contact-info {
+        padding: 25px 20px;
+        width: 100%;
+    }
+    
+    .contact-info li {
+        font-size: 1rem;
     }
     
     .footer-content {
         flex-direction: column;
         text-align: center;
         gap: 30px;
-        padding: 30px 20px;
+        padding: 30px 15px;
+        width: 100%;
     }
     
-    .footer-logo-section {
-        align-items: center;
-    }
-    
-    .footer-tagline {
-        margin-left: 0;
-        text-align: center;
+    .footer-logo {
+        font-size: 1.6rem;
+        justify-content: center;
+        margin-bottom: 10px;
     }
     
     .footer-copyright {
         text-align: center;
+        width: 100%;
     }
 }
 
@@ -1052,6 +1139,16 @@ body {
         padding: 20px;
     }
     
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .feature-card h3 {
+        font-size: 1.2rem;
+    }
+    
     .markdown-content {
         padding: 20px;
     }
@@ -1068,25 +1165,60 @@ body {
         display: block;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
-    }
-    
-    .contact-content {
-        padding: 20px;
-    }
-    
-    .contact-card {
-        padding: 25px;
-    }
-    
-    .contact-icon {
-        width: 80px;
-        height: 80px;
-        font-size: 2.5rem;
-    }
-    
-    .telegram-button {
         width: 100%;
-        justify-content: center;
-        padding: 15px;
+    }
+    
+    .nav-link {
+        min-width: 100px;
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+    
+    .logo {
+        font-size: 1.6rem;
+    }
+    
+    .logo i {
+        font-size: 1.4rem;
+    }
+}
+
+/* Исправление для мобильных отступов */
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+        width: 100%;
+    }
+    
+    .main-header,
+    .main-footer {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .header-container,
+    .container,
+    .footer-content {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    /* Убираем горизонтальный скролл */
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+}
+
+/* Исправление для сетки фракций на больших экранах */
+@media (min-width: 1200px) {
+    .factions-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1400px) {
+    .factions-grid {
+        grid-template-columns: repeat(4, 1fr);
     }
 }
