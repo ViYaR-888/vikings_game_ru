@@ -593,7 +593,8 @@ body {
 }
 
 .markdown-content table th {
-    color: white !important; /* ИСПРАВЛЕНО: белый текст на тёмном фоне */
+    color: white !important;
+    background: linear-gradient(135deg, var(--primary-brown), var(--primary-dark));
     font-weight: 600;
     text-align: left;
     padding: 15px;
