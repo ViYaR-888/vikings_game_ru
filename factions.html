@@ -59,6 +59,31 @@
                     <i class="fas fa-hand-point-up" style="font-size: 3rem; color: var(--primary-gold); margin-bottom: 20px; display: block;"></i>
                     <h2 style="color: var(--primary-dark); margin-bottom: 15px;">Выберите фракцию</h2>
                     <p>Нажмите на одну из карточек ниже, чтобы увидеть подробное описание фракции, её особенности и характеристики.</p>
+                    
+                    <!-- Быстрый навигация по фракциям -->
+                    <div class="quick-nav" style="margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+                        <a href="#" onclick="loadMarkdownFile('md-rules/scandinavia.md'); return false;" class="quick-link" style="padding: 8px 15px; background: var(--secondary-cream); border-radius: 5px; text-decoration: none; color: var(--primary-dark); border: 1px solid var(--border-color);">
+                            <i class="fas fa-ship"></i> Скандинавия
+                        </a>
+                        <a href="#" onclick="loadMarkdownFile('md-rules/west_frankish.md'); return false;" class="quick-link" style="padding: 8px 15px; background: var(--secondary-cream); border-radius: 5px; text-decoration: none; color: var(--primary-dark); border: 1px solid var(--border-color);">
+                            <i class="fas fa-crown"></i> Франки
+                        </a>
+                        <a href="#" onclick="loadMarkdownFile('md-rules/wessex.md'); return false;" class="quick-link" style="padding: 8px 15px; background: var(--secondary-cream); border-radius: 5px; text-decoration: none; color: var(--primary-dark); border: 1px solid var(--border-color);">
+                            <i class="fas fa-shield-alt"></i> Уэссекс
+                        </a>
+                        <a href="#" onclick="loadMarkdownFile('md-rules/abbasid.md'); return false;" class="quick-link" style="padding: 8px 15px; background: var(--secondary-cream); border-radius: 5px; text-decoration: none; color: var(--primary-dark); border: 1px solid var(--border-color);">
+                            <i class="fas fa-mosque"></i> Аббасиды
+                        </a>
+                        <a href="#" onclick="loadMarkdownFile('md-rules/byzantine.md'); return false;" class="quick-link" style="padding: 8px 15px; background: var(--secondary-cream); border-radius: 5px; text-decoration: none; color: var(--primary-dark); border: 1px solid var(--border-color);">
+                            <i class="fas fa-landmark"></i> Византия
+                        </a>
+                        <a href="#" onclick="loadMarkdownFile('md-rules/alba.md'); return false;" class="quick-link" style="padding: 8px 15px; background: var(--secondary-cream); border-radius: 5px; text-decoration: none; color: var(--primary-dark); border: 1px solid var(--border-color);">
+                            <i class="fas fa-mountain"></i> Альба
+                        </a>
+                        <a href="#" onclick="loadMarkdownFile('md-rules/ireland.md'); return false;" class="quick-link" style="padding: 8px 15px; background: var(--secondary-cream); border-radius: 5px; text-decoration: none; color: var(--primary-dark); border: 1px solid var(--border-color);">
+                            <i class="fas fa-clover"></i> Ирландия
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -139,5 +164,24 @@
     </footer>
 
     <script src="assets/js/main.js"></script>
+    <script>
+        // Добавляем обработчик для быстрой навигации
+        document.addEventListener('DOMContentLoaded', function() {
+            // Добавляем стили для быстрых ссылок
+            const style = document.createElement('style');
+            style.textContent = `
+                .quick-link {
+                    transition: all 0.3s ease;
+                }
+                .quick-link:hover {
+                    background: var(--primary-gold) !important;
+                    color: var(--primary-dark) !important;
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
 </body>
 </html>
