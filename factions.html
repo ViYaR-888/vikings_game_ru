@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Добавляем библиотеку marked для парсинга Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
     <header class="main-header">
@@ -43,106 +45,19 @@
 
     <main class="container">
         <div class="page-header">
-            <div class="breadcrumb">
+            <div class="breadcrumb" id="breadcrumb">
+                <!-- Хлебные крошки будут обновляться динамически -->
                 <a href="index.html"><i class="fas fa-home"></i> Главная</a>
                 <span class="separator">/</span>
-                <span class="current">Фракции</span>
+                <a href="#" onclick="showFactionsGrid(); return false;">Фракции</a>
             </div>
-            <h1><i class="fas fa-flag"></i> Фракции</h1>
-            <p class="page-description">Выберите свою армию для сражения. Кликните на фракцию для просмотра деталей.</p>
+            <h1><i class="fas fa-flag"></i> <span id="page-title">Фракции</span></h1>
+            <p class="page-description" id="page-description">Выберите свою армию для сражения. Кликните на фракцию для просмотра деталей.</p>
         </div>
 
         <div class="content-wrapper">
             <div class="markdown-content" id="markdown-content">
                 <!-- Содержимое будет загружено здесь -->
-                <div style="text-align: center; padding: 40px; color: var(--primary-brown);">
-                    <i class="fas fa-hand-point-up" style="font-size: 3rem; color: var(--primary-gold); margin-bottom: 20px; display: block;"></i>
-                    <h2 style="color: var(--primary-dark); margin-bottom: 15px;">Выберите фракцию</h2>
-                    <p>Нажмите на одну из карточек ниже, чтобы увидеть подробное описание фракции, её особенности и характеристики.</p>
-                    
-                    <!-- Быстрый навигация по фракциям -->
-                    <div class="quick-nav" style="margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
-                        <a href="#" onclick="loadMarkdownFile('md-rules/scandinavia.md'); return false;" class="quick-link" style="padding: 8px 15px; background: var(--secondary-cream); border-radius: 5px; text-decoration: none; color: var(--primary-dark); border: 1px solid var(--border-color);">
-                            <i class="fas fa-ship"></i> Скандинавия
-                        </a>
-                        <a href="#" onclick="loadMarkdownFile('md-rules/west_frankish.md'); return false;" class="quick-link" style="padding: 8px 15px; background: var(--secondary-cream); border-radius: 5px; text-decoration: none; color: var(--primary-dark); border: 1px solid var(--border-color);">
-                            <i class="fas fa-crown"></i> Франки
-                        </a>
-                        <a href="#" onclick="loadMarkdownFile('md-rules/wessex.md'); return false;" class="quick-link" style="padding: 8px 15px; background: var(--secondary-cream); border-radius: 5px; text-decoration: none; color: var(--primary-dark); border: 1px solid var(--border-color);">
-                            <i class="fas fa-shield-alt"></i> Уэссекс
-                        </a>
-                        <a href="#" onclick="loadMarkdownFile('md-rules/abbasid.md'); return false;" class="quick-link" style="padding: 8px 15px; background: var(--secondary-cream); border-radius: 5px; text-decoration: none; color: var(--primary-dark); border: 1px solid var(--border-color);">
-                            <i class="fas fa-mosque"></i> Аббасиды
-                        </a>
-                        <a href="#" onclick="loadMarkdownFile('md-rules/byzantine.md'); return false;" class="quick-link" style="padding: 8px 15px; background: var(--secondary-cream); border-radius: 5px; text-decoration: none; color: var(--primary-dark); border: 1px solid var(--border-color);">
-                            <i class="fas fa-landmark"></i> Византия
-                        </a>
-                        <a href="#" onclick="loadMarkdownFile('md-rules/alba.md'); return false;" class="quick-link" style="padding: 8px 15px; background: var(--secondary-cream); border-radius: 5px; text-decoration: none; color: var(--primary-dark); border: 1px solid var(--border-color);">
-                            <i class="fas fa-mountain"></i> Альба
-                        </a>
-                        <a href="#" onclick="loadMarkdownFile('md-rules/ireland.md'); return false;" class="quick-link" style="padding: 8px 15px; background: var(--secondary-cream); border-radius: 5px; text-decoration: none; color: var(--primary-dark); border: 1px solid var(--border-color);">
-                            <i class="fas fa-clover"></i> Ирландия
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="factions-grid">
-                <a href="#" onclick="loadMarkdownFile('md-rules/scandinavia.md'); return false;" class="faction-card">
-                    <div class="faction-icon">
-                        <i class="fas fa-ship"></i>
-                    </div>
-                    <h3>1. Скандинавия</h3>
-                    <p>Викинги и северные воины</p>
-                </a>
-                
-                <a href="#" onclick="loadMarkdownFile('md-rules/west_frankish.md'); return false;" class="faction-card">
-                    <div class="faction-icon">
-                        <i class="fas fa-crown"></i>
-                    </div>
-                    <h3>2. Западно-Франкское королевство</h3>
-                    <p>Каролингская империя</p>
-                </a>
-                
-                <a href="#" onclick="loadMarkdownFile('md-rules/wessex.md'); return false;" class="faction-card">
-                    <div class="faction-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>3. Королевство Уэссекс</h3>
-                    <p>Англосаксонское королевство</p>
-                </a>
-                
-                <a href="#" onclick="loadMarkdownFile('md-rules/abbasid.md'); return false;" class="faction-card">
-                    <div class="faction-icon">
-                        <i class="fas fa-mosque"></i>
-                    </div>
-                    <h3>4. Аббасидский халифат</h3>
-                    <p>Исламский халифат</p>
-                </a>
-                
-                <a href="#" onclick="loadMarkdownFile('md-rules/byzantine.md'); return false;" class="faction-card">
-                    <div class="faction-icon">
-                        <i class="fas fa-landmark"></i>
-                    </div>
-                    <h3>5. Византийская империя</h3>
-                    <p>Восточная Римская империя</p>
-                </a>
-                
-                <a href="#" onclick="loadMarkdownFile('md-rules/alba.md'); return false;" class="faction-card">
-                    <div class="faction-icon">
-                        <i class="fas fa-mountain"></i>
-                    </div>
-                    <h3>6. Королевство Альба</h3>
-                    <p>Шотландское королевство</p>
-                </a>
-                
-                <a href="#" onclick="loadMarkdownFile('md-rules/ireland.md'); return false;" class="faction-card">
-                    <div class="faction-icon">
-                        <i class="fas fa-clover"></i>
-                    </div>
-                    <h3>7. Ирландия</h3>
-                    <p>Гэльские королевства</p>
-                </a>
             </div>
         </div>
     </main>
@@ -165,22 +80,449 @@
 
     <script src="assets/js/main.js"></script>
     <script>
-        // Добавляем обработчик для быстрой навигации
-        document.addEventListener('DOMContentLoaded', function() {
-            // Добавляем стили для быстрых ссылок
+        // Обновленная функция для загрузки Markdown файлов
+        async function loadMarkdownFile(filename, factionName) {
+            const contentDiv = document.getElementById('markdown-content');
+            const breadcrumb = document.getElementById('breadcrumb');
+            const pageTitle = document.getElementById('page-title');
+            const pageDescription = document.getElementById('page-description');
+            
+            // Обновляем заголовок и описание страницы
+            pageTitle.textContent = factionName;
+            pageDescription.textContent = `Подробная информация о фракции ${factionName}`;
+            
+            // Обновляем хлебные крошки
+            breadcrumb.innerHTML = `
+                <a href="index.html"><i class="fas fa-home"></i> Главная</a>
+                <span class="separator">/</span>
+                <a href="#" onclick="showFactionsGrid(); return false;">Фракции</a>
+                <span class="separator">/</span>
+                <span class="current">${factionName}</span>
+            `;
+            
+            // Показываем индикатор загрузки
+            contentDiv.innerHTML = `
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Загрузка информации о фракции...</p>
+                </div>
+            `;
+            
+            try {
+                const response = await fetch(filename);
+                
+                if (!response.ok) {
+                    throw new Error(`Файл не найден: ${filename}`);
+                }
+                
+                const markdownText = await response.text();
+                
+                // Преобразуем Markdown в HTML
+                const htmlContent = marked.parse(markdownText);
+                
+                // Добавляем кнопку "Назад к списку фракций"
+                const fullContent = htmlContent + `
+                    <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+                        <a href="#" onclick="showFactionsGrid(); return false;" 
+                           style="display: inline-flex; align-items: center; gap: 10px; 
+                                  padding: 12px 24px; background: var(--primary-gold); 
+                                  color: var(--primary-dark); text-decoration: none; 
+                                  border-radius: 5px; font-weight: 600; transition: all 0.3s ease;">
+                            <i class="fas fa-arrow-left"></i>
+                            Назад к списку фракций
+                        </a>
+                    </div>
+                `;
+                
+                contentDiv.innerHTML = fullContent;
+                
+                // Прокручиваем к началу контента
+                contentDiv.scrollIntoView({ behavior: 'smooth' });
+                
+            } catch (error) {
+                console.error('Ошибка загрузки файла:', error);
+                contentDiv.innerHTML = `
+                    <div class="error" style="text-align: center; padding: 40px; color: var(--accent-red);">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                        <h2>Ошибка загрузки</h2>
+                        <p>Не удалось загрузить информацию о фракции.</p>
+                        <p style="font-size: 0.9rem; color: var(--primary-brown);">${error.message}</p>
+                        <button onclick="showFactionsGrid()" 
+                                style="margin-top: 20px; padding: 10px 20px; 
+                                       background: var(--primary-dark); color: white; 
+                                       border: none; border-radius: 5px; cursor: pointer;">
+                            Вернуться к списку фракций
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // Функция для показа сетки фракций (начальное состояние)
+        function showFactionsGrid() {
+            const contentDiv = document.getElementById('markdown-content');
+            const breadcrumb = document.getElementById('breadcrumb');
+            const pageTitle = document.getElementById('page-title');
+            const pageDescription = document.getElementById('page-description');
+            
+            // Восстанавливаем заголовок и описание
+            pageTitle.textContent = 'Фракции';
+            pageDescription.textContent = 'Выберите свою армию для сражения. Кликните на фракцию для просмотра деталей.';
+            
+            // Восстанавливаем хлебные крошки
+            breadcrumb.innerHTML = `
+                <a href="index.html"><i class="fas fa-home"></i> Главная</a>
+                <span class="separator">/</span>
+                <span class="current">Фракции</span>
+            `;
+            
+            // Показываем сетку фракций в виде компактных кнопок
+            contentDiv.innerHTML = `
+                <div style="text-align: center; padding: 20px 0 40px; color: var(--primary-brown);">
+                    <h2 style="color: var(--primary-dark); margin-bottom: 25px; font-family: var(--font-heading);">
+                        <i class="fas fa-flag" style="color: var(--primary-gold);"></i>
+                        Доступные фракции
+                    </h2>
+                    
+                    <div class="factions-buttons-grid" style="
+                        display: grid;
+                        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                        gap: 15px;
+                        margin: 30px auto;
+                        max-width: 1000px;
+                        padding: 0 20px;
+                    ">
+                        <!-- Скандинавия -->
+                        <a href="#" onclick="loadMarkdownFile('md-rules/scandinavia.md', 'Скандинавия'); return false;" 
+                           class="faction-button" style="
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                padding: 15px;
+                                background: white;
+                                border-radius: var(--border-radius);
+                                border: 2px solid var(--border-color);
+                                text-decoration: none;
+                                color: var(--primary-dark);
+                                transition: all 0.3s ease;
+                                cursor: pointer;
+                                text-align: center;
+                                height: 100%;
+                           ">
+                            <div style="
+                                width: 50px;
+                                height: 50px;
+                                background: linear-gradient(135deg, var(--primary-brown), var(--primary-dark));
+                                border-radius: 50%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                margin-bottom: 12px;
+                                color: white;
+                                font-size: 1.3rem;
+                            ">
+                                <i class="fas fa-ship"></i>
+                            </div>
+                            <h3 style="
+                                font-family: var(--font-heading);
+                                font-size: 1.1rem;
+                                margin-bottom: 8px;
+                                color: var(--primary-dark);
+                            ">1. Скандинавия</h3>
+                            <p style="
+                                color: var(--primary-brown);
+                                font-size: 0.85rem;
+                                line-height: 1.3;
+                            ">Викинги и северные воины</p>
+                        </a>
+                        
+                        <!-- Западно-Франкское королевство -->
+                        <a href="#" onclick="loadMarkdownFile('md-rules/west_frankish.md', 'Западно-Франкское королевство'); return false;" 
+                           class="faction-button" style="
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                padding: 15px;
+                                background: white;
+                                border-radius: var(--border-radius);
+                                border: 2px solid var(--border-color);
+                                text-decoration: none;
+                                color: var(--primary-dark);
+                                transition: all 0.3s ease;
+                                cursor: pointer;
+                                text-align: center;
+                                height: 100%;
+                           ">
+                            <div style="
+                                width: 50px;
+                                height: 50px;
+                                background: linear-gradient(135deg, var(--primary-brown), var(--primary-dark));
+                                border-radius: 50%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                margin-bottom: 12px;
+                                color: white;
+                                font-size: 1.3rem;
+                            ">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <h3 style="
+                                font-family: var(--font-heading);
+                                font-size: 1.1rem;
+                                margin-bottom: 8px;
+                                color: var(--primary-dark);
+                            ">2. Западно-Франкское королевство</h3>
+                            <p style="
+                                color: var(--primary-brown);
+                                font-size: 0.85rem;
+                                line-height: 1.3;
+                            ">Каролингская империя</p>
+                        </a>
+                        
+                        <!-- Королевство Уэссекс -->
+                        <a href="#" onclick="loadMarkdownFile('md-rules/wessex.md', 'Королевство Уэссекс'); return false;" 
+                           class="faction-button" style="
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                padding: 15px;
+                                background: white;
+                                border-radius: var(--border-radius);
+                                border: 2px solid var(--border-color);
+                                text-decoration: none;
+                                color: var(--primary-dark);
+                                transition: all 0.3s ease;
+                                cursor: pointer;
+                                text-align: center;
+                                height: 100%;
+                           ">
+                            <div style="
+                                width: 50px;
+                                height: 50px;
+                                background: linear-gradient(135deg, var(--primary-brown), var(--primary-dark));
+                                border-radius: 50%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                margin-bottom: 12px;
+                                color: white;
+                                font-size: 1.3rem;
+                            ">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3 style="
+                                font-family: var(--font-heading);
+                                font-size: 1.1rem;
+                                margin-bottom: 8px;
+                                color: var(--primary-dark);
+                            ">3. Королевство Уэссекс</h3>
+                            <p style="
+                                color: var(--primary-brown);
+                                font-size: 0.85rem;
+                                line-height: 1.3;
+                            ">Англосаксонское королевство</p>
+                        </a>
+                        
+                        <!-- Аббасидский халифат -->
+                        <a href="#" onclick="loadMarkdownFile('md-rules/abbasid.md', 'Аббасидский халифат'); return false;" 
+                           class="faction-button" style="
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                padding: 15px;
+                                background: white;
+                                border-radius: var(--border-radius);
+                                border: 2px solid var(--border-color);
+                                text-decoration: none;
+                                color: var(--primary-dark);
+                                transition: all 0.3s ease;
+                                cursor: pointer;
+                                text-align: center;
+                                height: 100%;
+                           ">
+                            <div style="
+                                width: 50px;
+                                height: 50px;
+                                background: linear-gradient(135deg, var(--primary-brown), var(--primary-dark));
+                                border-radius: 50%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                margin-bottom: 12px;
+                                color: white;
+                                font-size: 1.3rem;
+                            ">
+                                <i class="fas fa-mosque"></i>
+                            </div>
+                            <h3 style="
+                                font-family: var(--font-heading);
+                                font-size: 1.1rem;
+                                margin-bottom: 8px;
+                                color: var(--primary-dark);
+                            ">4. Аббасидский халифат</h3>
+                            <p style="
+                                color: var(--primary-brown);
+                                font-size: 0.85rem;
+                                line-height: 1.3;
+                            ">Исламский халифат</p>
+                        </a>
+                        
+                        <!-- Византийская империя -->
+                        <a href="#" onclick="loadMarkdownFile('md-rules/byzantine.md', 'Византийская империя'); return false;" 
+                           class="faction-button" style="
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                padding: 15px;
+                                background: white;
+                                border-radius: var(--border-radius);
+                                border: 2px solid var(--border-color);
+                                text-decoration: none;
+                                color: var(--primary-dark);
+                                transition: all 0.3s ease;
+                                cursor: pointer;
+                                text-align: center;
+                                height: 100%;
+                           ">
+                            <div style="
+                                width: 50px;
+                                height: 50px;
+                                background: linear-gradient(135deg, var(--primary-brown), var(--primary-dark));
+                                border-radius: 50%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                margin-bottom: 12px;
+                                color: white;
+                                font-size: 1.3rem;
+                            ">
+                                <i class="fas fa-landmark"></i>
+                            </div>
+                            <h3 style="
+                                font-family: var(--font-heading);
+                                font-size: 1.1rem;
+                                margin-bottom: 8px;
+                                color: var(--primary-dark);
+                            ">5. Византийская империя</h3>
+                            <p style="
+                                color: var(--primary-brown);
+                                font-size: 0.85rem;
+                                line-height: 1.3;
+                            ">Восточная Римская империя</p>
+                        </a>
+                        
+                        <!-- Королевство Альба -->
+                        <a href="#" onclick="loadMarkdownFile('md-rules/alba.md', 'Королевство Альба'); return false;" 
+                           class="faction-button" style="
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                padding: 15px;
+                                background: white;
+                                border-radius: var(--border-radius);
+                                border: 2px solid var(--border-color);
+                                text-decoration: none;
+                                color: var(--primary-dark);
+                                transition: all 0.3s ease;
+                                cursor: pointer;
+                                text-align: center;
+                                height: 100%;
+                           ">
+                            <div style="
+                                width: 50px;
+                                height: 50px;
+                                background: linear-gradient(135deg, var(--primary-brown), var(--primary-dark));
+                                border-radius: 50%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                margin-bottom: 12px;
+                                color: white;
+                                font-size: 1.3rem;
+                            ">
+                                <i class="fas fa-mountain"></i>
+                            </div>
+                            <h3 style="
+                                font-family: var(--font-heading);
+                                font-size: 1.1rem;
+                                margin-bottom: 8px;
+                                color: var(--primary-dark);
+                            ">6. Королевство Альба</h3>
+                            <p style="
+                                color: var(--primary-brown);
+                                font-size: 0.85rem;
+                                line-height: 1.3;
+                            ">Шотландское королевство</p>
+                        </a>
+                        
+                        <!-- Ирландия -->
+                        <a href="#" onclick="loadMarkdownFile('md-rules/ireland.md', 'Ирландия'); return false;" 
+                           class="faction-button" style="
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                padding: 15px;
+                                background: white;
+                                border-radius: var(--border-radius);
+                                border: 2px solid var(--border-color);
+                                text-decoration: none;
+                                color: var(--primary-dark);
+                                transition: all 0.3s ease;
+                                cursor: pointer;
+                                text-align: center;
+                                height: 100%;
+                           ">
+                            <div style="
+                                width: 50px;
+                                height: 50px;
+                                background: linear-gradient(135deg, var(--primary-brown), var(--primary-dark));
+                                border-radius: 50%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                margin-bottom: 12px;
+                                color: white;
+                                font-size: 1.3rem;
+                            ">
+                                <i class="fas fa-clover"></i>
+                            </div>
+                            <h3 style="
+                                font-family: var(--font-heading);
+                                font-size: 1.1rem;
+                                margin-bottom: 8px;
+                                color: var(--primary-dark);
+                            ">7. Ирландия</h3>
+                            <p style="
+                                color: var(--primary-brown);
+                                font-size: 0.85rem;
+                                line-height: 1.3;
+                            ">Гэльские королевства</p>
+                        </a>
+                    </div>
+                    
+                    <p style="color: var(--primary-brown); font-style: italic; max-width: 800px; margin: 30px auto 0;">
+                        Нажмите на карточку фракции, чтобы увидеть подробное описание, особенности, юнитов и стратегию игры.
+                    </p>
+                </div>
+            `;
+            
+            // Добавляем стили для кнопок при наведении
             const style = document.createElement('style');
             style.textContent = `
-                .quick-link {
-                    transition: all 0.3s ease;
-                }
-                .quick-link:hover {
-                    background: var(--primary-gold) !important;
-                    color: var(--primary-dark) !important;
-                    transform: translateY(-2px);
-                    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                .faction-button:hover {
+                    transform: translateY(-5px);
+                    box-shadow: var(--shadow-md);
+                    border-color: var(--primary-gold);
+                    background: var(--secondary-cream);
                 }
             `;
             document.head.appendChild(style);
+        }
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            showFactionsGrid();
         });
     </script>
 </body>
