@@ -19,6 +19,9 @@
     --light-text: #FFF9F0;
     --border-color: #E0D6C2;
     
+    /* НОВЫЙ ЦВЕТ ДЛЯ ЗАГОЛОВКОВ ТАБЛИЦ - более светлый и приятный */
+    --table-header-bg: #8B7355;
+    
     /* ШРИФТЫ */
     --font-heading: 'Cinzel', Georgia, serif;
     --font-body: 'Roboto', Arial, sans-serif;
@@ -589,17 +592,17 @@ body {
 }
 
 .markdown-content table thead {
-    background: linear-gradient(135deg, var(--primary-brown), var(--primary-dark));
+    background: var(--table-header-bg); /* ИСПРАВЛЕНО: более светлый цвет */
 }
 
 .markdown-content table th {
     color: white !important;
-    background: linear-gradient(135deg, var(--primary-brown), var(--primary-dark));
+    background: var(--table-header-bg); /* ИСПРАВЛЕНО: более светлый цвет */
     font-weight: 600;
     text-align: left;
     padding: 15px;
     border-bottom: 2px solid var(--primary-gold);
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.15); /* Более светлая граница */
     font-family: var(--font-heading);
     vertical-align: top;
 }
